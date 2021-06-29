@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iticd.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="最近看到了一篇关于vim的学习曲线文章《简明 VIM 练级攻略》，才发现自己也就比第一级强了那么一点点:( 最初接触vi&#x2F;vim时，最多在linux下修改配置文件的几个参数，没有特意去记忆、使用更多的快捷键。 使用linux多了，比如远程修改nginx服务器的配置文件，渐渐的发现需要掌握更多的vim操作快捷键。 在linux中，例如man指令，阅读帮助文档时的很多快捷键，和vim快捷键一致。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim &amp;&amp; terminal">
+<meta property="og:url" content="http://iticd.github.io/2020/08/31/vim-terminal/index.html">
+<meta property="og:site_name" content="iticd">
+<meta property="og:description" content="最近看到了一篇关于vim的学习曲线文章《简明 VIM 练级攻略》，才发现自己也就比第一级强了那么一点点:( 最初接触vi&#x2F;vim时，最多在linux下修改配置文件的几个参数，没有特意去记忆、使用更多的快捷键。 使用linux多了，比如远程修改nginx服务器的配置文件，渐渐的发现需要掌握更多的vim操作快捷键。 在linux中，例如man指令，阅读帮助文档时的很多快捷键，和vim快捷键一致。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2020/08/31/taCSKf5sJOlBnVu.gif">
+<meta property="og:image" content="https://i.loli.net/2020/08/31/RX348QS62EYfnqb.png">
+<meta property="og:image" content="https://i.loli.net/2020/08/31/6NLKXuOmrCc9713.png">
+<meta property="article:published_time" content="2020-08-30T17:24:34.000Z">
+<meta property="article:modified_time" content="2021-01-08T10:04:01.923Z">
+<meta property="article:author" content="iticd">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="keyboard shortcuts">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/08/31/taCSKf5sJOlBnVu.gif">
+
+<link rel="canonical" href="http://iticd.github.io/2020/08/31/vim-terminal/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>vim && terminal | iticd</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">iticd</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一年又一年…… 知而不行，是为不知；行而不知，可以致知</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-download">
+
+    <a href="/download/" rel="section"><i class="fa fa-download fa-fw"></i>下载</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vi-vim"><span class="nav-number">1.</span> <span class="nav-text">vi&#x2F;vim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vscode-%E4%B8%AD%E7%9A%84-vim%E6%89%A9%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">vscode 中的 vim扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux-terminal"><span class="nav-number">3.</span> <span class="nav-text">linux terminal</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%8C%E5%86%85%E7%A7%BB%E5%8A%A8%E5%85%89%E6%A0%87"><span class="nav-number">3.1.</span> <span class="nav-text">行内移动光标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%BC%96%E8%BE%91"><span class="nav-number">3.2.</span> <span class="nav-text">命令行编辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E7%9B%B8%E5%85%B3"><span class="nav-number">3.3.</span> <span class="nav-text">程序相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95"><span class="nav-number">3.4.</span> <span class="nav-text">历史记录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iticd</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iticd.github.io/2020/08/31/vim-terminal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iticd">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iticd">
+    </span>
+
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vim && terminal
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-31 01:24:34" itemprop="dateCreated datePublished" datetime="2020-08-31T01:24:34+08:00">2020-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-08 18:04:01" itemprop="dateModified" datetime="2021-01-08T18:04:01+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/all-vim-cheatsheat.html"><img src="https://i.loli.net/2020/08/31/taCSKf5sJOlBnVu.gif" alt="vi/vim graphical cheat sheet"></a></p>
+<blockquote>
+<p><em>最近看到了一篇关于vim的学习曲线文章<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a>，才发现自己也就比第一级强了那么一点点:(</em></p>
+<p>最初接触vi/vim时，最多在linux下修改配置文件的几个参数，没有特意去记忆、使用更多的快捷键。</p>
+<p>使用linux多了，比如远程修改nginx服务器的配置文件，渐渐的发现需要掌握更多的vim操作快捷键。</p>
+<p>在linux中，例如man指令，阅读帮助文档时的很多快捷键，和vim快捷键一致。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="vi-vim"><a href="#vi-vim" class="headerlink" title="vi/vim"></a>vi/vim</h2><p>在<a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a>中给了一种学习曲线，由易到难，可以克服初学者的恐惧心里。</p>
+<p>看了vi/vim graphical cheat sheet中的键盘标记，针对电脑上的文本编辑操作，可以分几类记忆：</p>
+<ul>
+<li>光标移动 motion<ul>
+<li>方向键：h，j，k，l</li>
+<li>文本行内移动光标：w，e，b，0，$</li>
+<li>句子，段落移动：（），{}</li>
+<li>移动到指定行号：gg（文档首行），G（文档末尾），ngg（移动到第n行）</li>
+<li>查找：fx（行内查找字符x并移动），/&lt;表达式&gt; （全文查找，多个查找结果使用n，N切换下一个）</li>
+<li>mark标记：ma…mz（标记a…z）,’a…’z（），`a…`z（移动到a…z）</li>
+<li>翻页：ctrl+b/f</li>
+</ul>
+</li>
+<li>编辑 command<ul>
+<li>进入插入模式（insert mode）：i，a，o（对应大写I，A，O）</li>
+<li>复制/粘贴：y/p（yy复制行；复制操作y，结合w，e，b，0，$等对应移动光标操作，可以复制光标移动范围内容）</li>
+<li>undo/redo：u/ctrl+r</li>
+<li>块操作：ctrl+v</li>
+<li>删除：d （dd删除行；删除操作d，结合w，e，b，0，$等对应移动光标操作，可以删除光标移动范围内容）</li>
+</ul>
+</li>
+</ul>
+<p>关于光标移动的具体位置，可以参考下图：</p>
+<p><img src="https://i.loli.net/2020/08/31/RX348QS62EYfnqb.png" alt="img"></p>
+<p>详细的操作帮助，可以阅读vi/vim帮助文档，在vi/vim中，执行:h</p>
+<p>另外，也可以阅读</p>
+<p><a href="">史上最全Vim快捷键键位图（入门到进阶）</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.viemu.com/a_vi_vim_graphical_cheat_sheet_tutorial.html">Graphical vi-vim Cheat Sheet and Tutorial</a></p>
+<h2 id="vscode-中的-vim扩展"><a href="#vscode-中的-vim扩展" class="headerlink" title="vscode 中的 vim扩展"></a>vscode 中的 <a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=vscodevim.vim">vim扩展</a></h2><p>总的来说，vim的键盘操作，在文本编辑中效率还是远远高于鼠标+键盘。如果想多练习，很多开发工具中都有vim的键盘扩展插件。VSCodeVim is a Vim emulator for <a target="_blank" rel="noopener" href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+<ul>
+<li>🚚 For a full list of supported Vim features, please refer to our <a target="_blank" rel="noopener" href="https://github.com/VSCodeVim/Vim/blob/master/ROADMAP.md">roadmap</a>.</li>
+<li>📃 Our <a target="_blank" rel="noopener" href="https://github.com/VSCodeVim/Vim/blob/master/CHANGELOG.md">change log</a> outlines the breaking/major/minor updates between releases.</li>
+<li>❓ If you need to ask any questions, join us on <a target="_blank" rel="noopener" href="https://vscodevim.herokuapp.com/">Slack</a></li>
+<li>Report missing features/bugs on <a target="_blank" rel="noopener" href="https://github.com/VSCodeVim/Vim/issues">GitHub</a>.</li>
+</ul>
+<h2 id="linux-terminal"><a href="#linux-terminal" class="headerlink" title="linux terminal"></a>linux terminal</h2><p><img src="https://i.loli.net/2020/08/31/6NLKXuOmrCc9713.png" alt="linux terminal"></p>
+<p>linux最多使用的是terminal工具，特别是通过ssh远程连接到linux服务器进行管理。</p>
+<p>虽然每次命令行只有一行，但使用时，终端提供了很多快捷键(默认的是emacs模式)，通过<code>set -o vi</code>指令，可以将终端快捷键模式修改为vi快捷键，此时终端进入的是vi insert mode，需要编辑命令行时，按ESC键，进入command mode，此时就可以使用vi的快捷键移动光标。</p>
+<p>考虑到大多数的默认配置是emacs模式，还是记录该模式快捷键比较好，下面是一些常用快捷键：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tab</td>
+<td>按一次补全指令或路径，按两次列出所有相关信息。</td>
+</tr>
+<tr>
+<td>Shift + Insert</td>
+<td>从系统剪贴板粘贴，不同终端可能有其它快捷键</td>
+</tr>
+<tr>
+<td>Ctrl + l</td>
+<td>清屏</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="行内移动光标"><a href="#行内移动光标" class="headerlink" title="行内移动光标"></a>行内移动光标</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + a</td>
+<td>移动光标到命令行首。</td>
+</tr>
+<tr>
+<td>Ctrl + e</td>
+<td>移动光标到命令行尾。</td>
+</tr>
+<tr>
+<td>Alt + f <br>Ctrl + ⬅</td>
+<td>向前移动一个单词</td>
+</tr>
+<tr>
+<td>Alt + b <br>Ctrl + ➡</td>
+<td>向后移动一个单词</td>
+</tr>
+<tr>
+<td>Alt + a</td>
+<td>将光标移到当前单词头部</td>
+</tr>
+<tr>
+<td>Alt + e</td>
+<td>将光标移到当前单词尾部</td>
+</tr>
+</tbody></table>
+<h3 id="命令行编辑"><a href="#命令行编辑" class="headerlink" title="命令行编辑"></a>命令行编辑</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + k</td>
+<td>剪切文本直到行的末尾，删除光标后面所有字符</td>
+</tr>
+<tr>
+<td>Ctrl + u</td>
+<td>剪切文本直到行的起始，删除光标前面所有字符</td>
+</tr>
+<tr>
+<td>Ctrl + w</td>
+<td>剪切光标前的单词(光标位置到前方空格或行首)</td>
+</tr>
+<tr>
+<td>Ctrl + y</td>
+<td>粘贴上面指令删除内容</td>
+</tr>
+<tr>
+<td>Ctrl + d</td>
+<td>删除当前的字符</td>
+</tr>
+<tr>
+<td>Ctrl + t</td>
+<td>交换当前字符和前一个字符的位置</td>
+</tr>
+<tr>
+<td>Alt + t</td>
+<td>交换当前单词和前一个单词的位置</td>
+</tr>
+<tr>
+<td>Alt + u</td>
+<td>把当前单词变成大写</td>
+</tr>
+<tr>
+<td>Alt + l</td>
+<td>把当前单词变成小写</td>
+</tr>
+<tr>
+<td>Alt + c</td>
+<td>把当前单词变成首字母大写的单词</td>
+</tr>
+<tr>
+<td>Alt + d</td>
+<td>删除从光标到当前单词结尾的部分</td>
+</tr>
+<tr>
+<td>Alt + y</td>
+<td>回退到先前剪切的文本并粘贴它</td>
+</tr>
+<tr>
+<td>Ctrl + x + u</td>
+<td>撤销刚才的操作</td>
+</tr>
+<tr>
+<td>Ctrl + c</td>
+<td>另起新行</td>
+</tr>
+</tbody></table>
+<h3 id="程序相关"><a href="#程序相关" class="headerlink" title="程序相关"></a>程序相关</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + z</td>
+<td>中断程序放到后台，唤醒使用“fg”命令。</td>
+</tr>
+<tr>
+<td>Ctrl + s</td>
+<td>挂起，暂停屏幕输出，感觉类似于暂停。</td>
+</tr>
+<tr>
+<td>Ctrl + q</td>
+<td>退出挂起，感觉类似于继续，发现按键盘其它按键也可以退出挂起，有点疑问。</td>
+</tr>
+<tr>
+<td>Ctrl + c</td>
+<td>中断并杀死，程序终止。</td>
+</tr>
+<tr>
+<td>Ctrl + d</td>
+<td>“EOF” (文件结尾：end of file)。它用于表示标准输入（stdin）的结束。<br>例如：进入python交互式解释器或ssh远程登陆后，按Ctrl+d键退出<br>在控制台或xterm 窗口输入文本时， 删除在光标下的字符。</td>
+</tr>
+</tbody></table>
+<h3 id="历史记录"><a href="#历史记录" class="headerlink" title="历史记录"></a>历史记录</h3><p>参考：<a target="_blank" rel="noopener" href="https://juejin.im/post/6844903849036251150">以Terminal历史记录来提高Linux操作效率</a></p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Ctrl + r</td>
+<td>搜索匹配最近使用的指令（）</td>
+</tr>
+<tr>
+<td>执行历史指令</td>
+<td>!n   指定编号命令<br>!-n 倒序n处命令 <br>!!    !-1的简写，也就是最近的一条命令<br>!str 以str开头的最近一条命令，这种方式str中不能存在空格，可使用ctrl+r快捷键代替。</td>
+</tr>
+<tr>
+<td>Ctrl + p</td>
+<td>显示上一条命令，同向上箭头。</td>
+</tr>
+<tr>
+<td>Ctrl + n</td>
+<td>显示下一条命令，同向下箭头。</td>
+</tr>
+<tr>
+<td>!$</td>
+<td>显示系统最近的一条参数，应用例子：<br>先执行<code>cat /etc/sysconfig/network-scripts/ifconfig-eth0</code>，然后用vim编辑。<br>一般做法：先↑ 显示最后一条命令，Home移到最前，删除cat，输入vim。其实可用vim !$代替</td>
+</tr>
+</tbody></table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://coolshell.cn/articles/5426.html">《简明 VIM 练级攻略》</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/all-vim-cheatsheat.html">史上最全Vim快捷键键位图（入门到进阶）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/w3cnote/bash-shortcut.html">Bash 快捷键大全</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/pipisorry/article/details/39560583">linux键盘及终端快捷键</a></p>
+<pre class="language-none"><code class="language-none"></code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/keyboard-shortcuts/" rel="tag"># keyboard shortcuts</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/26/%E4%B8%80%E5%B9%B4%E5%8F%88%E4%B8%80%E5%B9%B4-2020-08/" rel="prev" title="一年又一年 2020-08">
+      <i class="fa fa-chevron-left"></i> 一年又一年 2020-08
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/02/python%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" rel="next" title="python自动化运维快速入门">
+      python自动化运维快速入门 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iticd</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '45fd556ba2636adfe5a8',
+      clientSecret: '9176b70f8e2d4b8b5abf01b2573883a7f19bf90b',
+      repo        : 'issue',
+      owner       : 'iticd',
+      admin       : ['iticd'],
+      id          : 'ef5b70fae1a314adcaffb422692c0802',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

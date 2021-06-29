@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iticd.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="python自动化运维快速入门 笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python自动化运维快速入门">
+<meta property="og:url" content="http://iticd.github.io/2021/06/02/python%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="iticd">
+<meta property="og:description" content="python自动化运维快速入门 笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/iticd/im/raw/master/images/2021/3b5b663d4ae49889.jpg">
+<meta property="article:published_time" content="2021-06-02T03:03:25.000Z">
+<meta property="article:modified_time" content="2021-06-20T09:26:37.682Z">
+<meta property="article:author" content="iticd">
+<meta property="article:tag" content="note">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="系统维护">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/iticd/im/raw/master/images/2021/3b5b663d4ae49889.jpg">
+
+<link rel="canonical" href="http://iticd.github.io/2021/06/02/python%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>python自动化运维快速入门 | iticd</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">iticd</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一年又一年…… 知而不行，是为不知；行而不知，可以致知</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-download">
+
+    <a href="/download/" rel="section"><i class="fa fa-download fa-fw"></i>下载</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%90%E7%86%9F%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%B9%B3%E5%8F%B0"><span class="nav-number">1.</span> <span class="nav-text">成熟的自动化运维平台</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python"><span class="nav-number">2.</span> <span class="nav-text">python</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8C%96%E5%92%8C%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">序列化和反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ini%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">ini配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xml-%E6%96%87%E4%BB%B6"><span class="nav-number">2.3.</span> <span class="nav-text">xml 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E7%9B%91%E6%8E%A7"><span class="nav-number">2.4.</span> <span class="nav-text">系统信息监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7"><span class="nav-number">2.5.</span> <span class="nav-text">文件系统监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%A4%96%E9%83%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.6.</span> <span class="nav-text">执行外部命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A5%E5%BF%97%E6%A8%A1%E5%9D%97"><span class="nav-number">2.7.</span> <span class="nav-text">日志模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.8.</span> <span class="nav-text">FTP服务器，客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%EF%BC%8C%E5%BE%AE%E4%BF%A1%E9%80%9A%E7%9F%A5"><span class="nav-number">2.9.</span> <span class="nav-text">邮件，微信通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#host%E6%96%87%E4%BB%B6"><span class="nav-number">2.10.</span> <span class="nav-text">host文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ssh%E6%8E%88%E4%BF%A1%EF%BC%88%E4%BD%BF%E7%94%A8%E5%85%AC%E9%92%A5%E7%99%BB%E5%BD%95ssh%EF%BC%89"><span class="nav-number">2.11.</span> <span class="nav-text">ssh授信（使用公钥登录ssh）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">2.12.</span> <span class="nav-text">参考：</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iticd</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iticd.github.io/2021/06/02/python%E8%87%AA%E5%8A%A8%E5%8C%96%E8%BF%90%E7%BB%B4%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iticd">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iticd">
+    </span>
+
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python自动化运维快速入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-02 11:03:25" itemprop="dateCreated datePublished" datetime="2021-06-02T11:03:25+08:00">2021-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 17:26:37" itemprop="dateModified" datetime="2021-06-20T17:26:37+08:00">2021-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/note/" itemprop="url" rel="index"><span itemprop="name">note</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://item.jd.com/12510837.html"><img src="https://gitee.com/iticd/im/raw/master/images/2021/3b5b663d4ae49889.jpg" alt="Python自动化运维快速入门"></a></p>
+<p><em>python自动化运维快速入门 笔记</em></p>
+<a id="more"></a>
+
+
+
+<h2 id="成熟的自动化运维平台"><a href="#成熟的自动化运维平台" class="headerlink" title="成熟的自动化运维平台"></a>成熟的自动化运维平台</h2><blockquote>
+<ol>
+<li>需要有支持混合云的配置管理数据库（<a target="_blank" rel="noopener" href="https://blog.csdn.net/BtB5e6Nsu1g511Eg5XEg/article/details/83373984" title="配置管理数据库">CMDB</a>)</li>
+<li>有完备的监控和应用性能分析系统。例如<a target="_blank" rel="noopener" href="https://www.zabbix.com/" title="基于WEB界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案 ">zabbix</a></li>
+<li>需要具备批量运维工具。例如<a href="ansible">ansible</a></li>
+<li>需要有日志分析工具。例如 <a href="Sentry">Sentry</a></li>
+<li>需要有持续集成（ <a href="Jenkins">Jenkins</a> 和版本空值工具 <a href="">git</a>。</li>
+</ol>
+</blockquote>
+<h2 id="python"><a href="#python" class="headerlink" title="python"></a>python</h2><p><a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3/">3.9.5 Documentation (python.org)</a></p>
+<h3 id="序列化和反序列化"><a href="#序列化和反序列化" class="headerlink" title="序列化和反序列化"></a>序列化和反序列化</h3><p>对象存储(二进制，默认protocol协议)</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> pickle
+pickle<span class="token punctuation">.</span>dump<span class="token punctuation">(</span>obj<span class="token punctuation">,</span> f<span class="token punctuation">)</span>
+pickle<span class="token punctuation">.</span>load<span class="token punctuation">(</span>f<span class="token punctuation">)</span></code></pre>
+
+<h3 id="ini配置文件"><a href="#ini配置文件" class="headerlink" title="ini配置文件"></a>ini配置文件</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> configparser</code></pre>
+
+<h3 id="xml-文件"><a href="#xml-文件" class="headerlink" title="xml 文件"></a>xml 文件</h3><p>三种方式：</p>
+<pre class="language-python" data-language="python"><code class="language-python"><span class="token comment">#sax</span>
+<span class="token keyword">import</span> xml<span class="token punctuation">.</span>sax
+
+<span class="token comment">#DOM</span>
+<span class="token keyword">from</span> xml<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>minidom <span class="token keyword">import</span> parse
+<span class="token keyword">import</span> xml<span class="token punctuation">.</span>dom<span class="token punctuation">.</span>minidom
+
+<span class="token comment">#ElementTre</span>
+<span class="token keyword">import</span> xml<span class="token punctuation">.</span>etree<span class="token punctuation">.</span>ElementTree <span class="token keyword">as</span> ET
+</code></pre>
+
+<h3 id="系统信息监控"><a href="#系统信息监控" class="headerlink" title="系统信息监控"></a>系统信息监控</h3><pre class="language-python" data-language="python"><code class="language-python">pip install psutil
+<span class="token comment"># cpu 信息</span>
+<span class="token comment"># 内存信息</span>
+<span class="token comment"># 磁盘信息</span>
+<span class="token comment"># 网络信息</span>
+<span class="token comment"># 进程信息</span></code></pre>
+
+<h3 id="文件系统监控"><a href="#文件系统监控" class="headerlink" title="文件系统监控"></a>文件系统监控</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> watchdog</code></pre>
+
+<h3 id="执行外部命令"><a href="#执行外部命令" class="headerlink" title="执行外部命令"></a>执行外部命令</h3><pre class="language-python" data-language="python"><code class="language-python"><span class="token keyword">import</span> subprocess</code></pre>
+
+<h3 id="日志模块"><a href="#日志模块" class="headerlink" title="日志模块"></a>日志模块</h3><pre class="language-ini" data-language="ini"><code class="language-ini"><span class="token selector">[loggers]</span>
+<span class="token constant">keys</span><span class="token attr-value"><span class="token punctuation">=</span>root,file,fileAndConsole</span>
+<span class="token selector">[handlers]</span>
+<span class="token constant">keys</span><span class="token attr-value"><span class="token punctuation">=</span>fileHandler,consoleHandler</span>
+<span class="token selector">[formatters]</span>
+<span class="token constant">keys</span><span class="token attr-value"><span class="token punctuation">=</span>logfile</span>
+<span class="token selector">[logger_root]</span>
+<span class="token constant">level</span><span class="token attr-value"><span class="token punctuation">=</span>DEBUG</span>
+<span class="token constant">handlers</span><span class="token attr-value"><span class="token punctuation">=</span>fileHandler,consoleHandler</span>
+<span class="token selector">[logger_file]</span>
+<span class="token constant">level</span><span class="token attr-value"><span class="token punctuation">=</span>DEBUG</span>
+<span class="token constant">handlers</span><span class="token attr-value"><span class="token punctuation">=</span>fileHandler</span>
+<span class="token constant">qualname</span><span class="token attr-value"><span class="token punctuation">=</span>file</span>
+<span class="token constant">propagate</span><span class="token attr-value"><span class="token punctuation">=</span>1</span>
+<span class="token selector">[logger_fileAndConsole]</span>
+<span class="token constant">level</span><span class="token attr-value"><span class="token punctuation">=</span>DEBUG</span>
+<span class="token constant">handlers</span><span class="token attr-value"><span class="token punctuation">=</span>fileHandler,consoleHandler</span>
+<span class="token constant">qualname</span><span class="token attr-value"><span class="token punctuation">=</span>fileAndConsole</span>
+<span class="token constant">propagate</span><span class="token attr-value"><span class="token punctuation">=</span>0</span>
+<span class="token selector">[handler_consoleHandler]</span>
+<span class="token constant">class</span><span class="token attr-value"><span class="token punctuation">=</span>StreamHandler</span>
+<span class="token constant">args</span><span class="token attr-value"><span class="token punctuation">=</span>(sys.stdout,)</span>
+<span class="token constant">level</span><span class="token attr-value"><span class="token punctuation">=</span>DEBUG</span>
+<span class="token constant">formatter</span><span class="token attr-value"><span class="token punctuation">=</span>logfile</span>
+<span class="token selector">[handler_fileHandler]</span>
+<span class="token constant">class</span><span class="token attr-value"><span class="token punctuation">=</span>handlers.RotatingFileHandler</span>
+<span class="token constant">args</span><span class="token attr-value"><span class="token punctuation">=</span>('./log/log.txt', 1048510, 10)</span>
+<span class="token constant">level</span><span class="token attr-value"><span class="token punctuation">=</span>DEBUG</span>
+<span class="token constant">formatter</span><span class="token attr-value"><span class="token punctuation">=</span>logfile</span>
+
+<span class="token selector">[formatter_logfile]</span>
+<span class="token constant">format</span><span class="token attr-value"><span class="token punctuation">=</span>%(asctime)s - %(module)s - %(thread)d - %(levelname)s : %(message)s</span>
+<span class="token constant">datefmt</span><span class="token attr-value"><span class="token punctuation">=</span>%Y-%m-%d %H:%M:%S</span></code></pre>
+
+<p>参考：</p>
+<p>[Python root logger 解密](<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/cad8a77762b3">Python root logger 解密 - 简书 (jianshu.com)</a>)</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_34182808/article/details/100735895">Python通过logging.config.fileConfig()配置日志_天涯的博客-CSDN博客</a></p>
+<h3 id="FTP服务器，客户端"><a href="#FTP服务器，客户端" class="headerlink" title="FTP服务器，客户端"></a>FTP服务器，客户端</h3><h3 id="邮件，微信通知"><a href="#邮件，微信通知" class="headerlink" title="邮件，微信通知"></a>邮件，微信通知</h3><pre class="language-python" data-language="python"><code class="language-python">```
+
+<span class="token comment">## 自动化运维工具Ansible</span>
+
+https<span class="token punctuation">:</span><span class="token operator">//</span>docs<span class="token punctuation">.</span>ansible<span class="token punctuation">.</span>com<span class="token operator">/</span>
+
+!<span class="token punctuation">[</span>ansible 架构<span class="token punctuation">]</span><span class="token punctuation">(</span>https<span class="token punctuation">:</span><span class="token operator">//</span>gitee<span class="token punctuation">.</span>com<span class="token operator">/</span>iticd<span class="token operator">/</span>im<span class="token operator">/</span>raw<span class="token operator">/</span>master<span class="token operator">/</span>images<span class="token operator">/</span><span class="token number">2021</span><span class="token operator">/</span><span class="token number">1461461</span><span class="token operator">-</span><span class="token number">20181025085243264</span><span class="token operator">-</span><span class="token number">1509154421.</span>png<span class="token punctuation">)</span>
+
+```shell
+pip install ansible
+
+<span class="token comment"># ubuntu apt</span>
+sudo apt install software<span class="token operator">-</span>properties<span class="token operator">-</span>common
+sudo apt<span class="token operator">-</span>add<span class="token operator">-</span>repository ppa<span class="token punctuation">:</span>ansible<span class="token operator">/</span>ansible
+sudo apt update 
+sudo apt<span class="token operator">-</span>get install ansible
+
+<span class="token comment"># 测试</span>
+ansible <span class="token builtin">all</span> <span class="token operator">-</span>m ping <span class="token operator">-</span><span class="token operator">-</span>ask<span class="token operator">-</span><span class="token keyword">pass</span>
+<span class="token comment"># "msg": "to use the 'ssh' connection type with passwords, you must install the sshpass program"</span>
+sudo apt install sshpass
+
+
+<span class="token comment"># 远程主机添加用户</span>
+
+useradd username <span class="token operator">-</span>m
+<span class="token comment">#设置密码</span>
+passwd username 
+<span class="token comment">#Enter new UNIX password: 123456</span>
+<span class="token comment">#Retype new UNIX password: 123456</span>
+<span class="token comment">#改变组</span>
+usermod <span class="token operator">-</span>g root username
+<span class="token comment">#确定是否在root组</span>
+<span class="token builtin">id</span> username
+uid<span class="token operator">=</span><span class="token number">1001</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span> gid<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span> groups<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">(</span>root<span class="token punctuation">)</span>``
+<span class="token comment">#————————————————</span>
+<span class="token comment">#版权声明：本文为CSDN博主「Cosmop01itan」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。</span>
+<span class="token comment">#原文链接：https://blog.csdn.net/CosmopolitanMe/article/details/94214246</span>
+
+<span class="token comment"># python3.9安装</span>
+sudo apt update
+sudo apt install software<span class="token operator">-</span>properties<span class="token operator">-</span>common
+sudo add<span class="token operator">-</span>apt<span class="token operator">-</span>repository ppa<span class="token punctuation">:</span>deadsnakes<span class="token operator">/</span>ppa
+sudo apt update
+sudo apt install python3<span class="token punctuation">.</span><span class="token number">9</span>
+
+<span class="token comment"># python3.9 E: 无法修正错误，因为您要求某些软件包保持现状，就是它们破坏了软件包间的依赖关系。</span>
+apt<span class="token operator">-</span>get install aptitude
+aptitude install python3<span class="token punctuation">.</span><span class="token number">9</span>
+<span class="token comment">## arrch64架构最新版本3.6.5</span>
+ 
+<span class="token comment"># conda https://docs.conda.io/en/latest/miniconda.html</span>
+conda install python <span class="token operator">=</span> <span class="token number">3.9</span><span class="token number">.5</span>
+
+<span class="token comment"># canda 清华镜像https://mirror.tuna.tsinghua.edu.cn/help/anaconda/</span>
+
+</code></pre>
+
+<h3 id="host文件"><a href="#host文件" class="headerlink" title="host文件"></a>host文件</h3><pre class="language-none"><code class="language-none">
+[pc]
+dell ansible_ssh_host&#x3D;192.168.3.23 ansible_ssh_user&#x3D;&quot;username&quot; ansible_ssh_port&#x3D;22 ansible_python_interpreter&#x3D;&#x2F;usr&#x2F;bin&#x2F;python3</code></pre>
+
+<p>注：</p>
+<pre class="language-none"><code class="language-none">FAILED! &#x3D;&gt; &#123;
+&quot;changed&quot;: false,
+&quot;module_stderr&quot;: &quot;Shared connection to 52.82.37.16 closed.\r\n&quot;,
+&quot;module_stdout&quot;: &quot;&#x2F;bin&#x2F;sh: 1: &#x2F;usr&#x2F;bin&#x2F;python: not found\r\n&quot;,
+&quot;msg&quot;: &quot;MODULE FAILURE&quot;,
+&quot;rc&quot;: 127
+&#125;
+————————————————
+版权声明：本文为CSDN博主「Elves_zhou」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_43178297&#x2F;article&#x2F;details&#x2F;103071204
+
+需指定ansible_python_interpreter参数</code></pre>
+
+<h3 id="ssh授信（使用公钥登录ssh）"><a href="#ssh授信（使用公钥登录ssh）" class="headerlink" title="ssh授信（使用公钥登录ssh）"></a>ssh授信（使用公钥登录ssh）</h3><pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment"># 本机公钥</span>
+ssh-keygen
+<span class="token comment">#ansible 执行ssh授信 https://www.cnblogs.com/architectforest/p/12766356.html</span>
+
+ansible all -m authorized_key -a <span class="token string">"user=iticd key='&#123;&#123;lookup('file','~/.ssh/id_rsa.pub')&#125;&#125;' "</span> --ask-pass</code></pre>
+
+
+
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ec7078508b8e">ansible之hosts文件配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wlbl/p/9843273.html">Ansible 自动化运维工具简单入门（一）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wlbl/p/9844974.html">Ansible 自动化运维工具简单入门（二）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wlbl/p/9853277.html">Ansible 自动化运维工具简单入门（三）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wlbl/p/9868399.html">Ansible 自动化运维工具简单入门（四）</a></p>
+<hr>
+<hr>
+<p>参考：</p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/5f671aca2b5a">Jenkins详细教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/yuyuena/article/details/108335464">Windows10下的WSL的使用和ssh配置</a></p>
+<pre class="language-shell" data-language="shell"><code class="language-shell"><span class="token comment">##登录帐号就会启动，写入到bash中</span>
+<span class="token function">sed</span> -i <span class="token string">'/^sudo service ssh --full-restart/ d'</span> ~/.bashrc
+
+<span class="token comment">##使用sudo开机自启动</span>
+<span class="token builtin class-name">echo</span> -e <span class="token string">"%sudo<span class="token entity" title="\t">\t</span>ALL=(ALL) NOPASSWD: /usr/sbin/service ssh --full-restart"</span> <span class="token operator">|</span> <span class="token function">sudo</span> <span class="token function">tee</span> -a /etc/sudoers
+
+<span class="token comment">##检测ssh的状态，也是写入到bash中</span>
+<span class="token function">cat</span> <span class="token operator">&lt;&lt;</span> <span class="token string">'EOF'</span> <span class="token operator">>></span> ~/.bashrc
+<span class="token assign-left variable">sshd_status</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">service</span> <span class="token function">ssh</span> status<span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token variable">$sshd_status</span> <span class="token operator">=</span> *<span class="token string">"is not running"</span>* <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token function">sudo</span> <span class="token function">service</span> <span class="token function">ssh</span> --full-restart
+<span class="token keyword">fi</span>
+EOF
+</code></pre>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/note/" rel="tag"># note</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4/" rel="tag"># 系统维护</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/31/vim-terminal/" rel="prev" title="vim && terminal">
+      <i class="fa fa-chevron-left"></i> vim && terminal
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/02/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6/" rel="next" title="常用软件">
+      常用软件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iticd</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '45fd556ba2636adfe5a8',
+      clientSecret: '9176b70f8e2d4b8b5abf01b2573883a7f19bf90b',
+      repo        : 'issue',
+      owner       : 'iticd',
+      admin       : ['iticd'],
+      id          : '46e04d37b6f420e73d8936ee6b8e05e6',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

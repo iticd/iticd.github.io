@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iticd.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="以前使用docsify管理文档，如果个人使用，功能基本满足要求，但docify的显示theme不能令我满意。最近发现了Hexo搭建博客的介绍，并且相关开发人员比较活跃，决定尝试一下。开始阅读hexo的文档有些迷糊，后来看过其它文章，才渐渐明白hexo的使用，与相关主题的使用密不可分，可能用到最后，都是自己开发适合自己的theme……我选择了一个比较喜欢的主题maupassant,试用后，感觉作者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo个人博客搭建（theme next）">
+<meta property="og:url" content="http://iticd.github.io/2020/08/25/hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88theme-next%EF%BC%89/index.html">
+<meta property="og:site_name" content="iticd">
+<meta property="og:description" content="以前使用docsify管理文档，如果个人使用，功能基本满足要求，但docify的显示theme不能令我满意。最近发现了Hexo搭建博客的介绍，并且相关开发人员比较活跃，决定尝试一下。开始阅读hexo的文档有些迷糊，后来看过其它文章，才渐渐明白hexo的使用，与相关主题的使用密不可分，可能用到最后，都是自己开发适合自己的theme……我选择了一个比较喜欢的主题maupassant,试用后，感觉作者">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2020/08/26/dfQ7Px.png">
+<meta property="article:published_time" content="2020-08-25T03:13:27.000Z">
+<meta property="article:modified_time" content="2021-01-08T10:04:01.879Z">
+<meta property="article:author" content="iticd">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="个人博客">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/08/26/dfQ7Px.png">
+
+<link rel="canonical" href="http://iticd.github.io/2020/08/25/hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88theme-next%EF%BC%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>hexo个人博客搭建（theme next） | iticd</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">iticd</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一年又一年…… 知而不行，是为不知；行而不知，可以致知</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-download">
+
+    <a href="/download/" rel="section"><i class="fa fa-download fa-fw"></i>下载</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E9%A1%B9%E7%9B%AE%E5%88%9B%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">文档项目创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96hexo%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.</span> <span class="nav-text">初始化hexo目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0git%E7%AE%A1%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">添加git管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-NexT-theme"><span class="nav-number">1.3.</span> <span class="nav-text">添加 NexT theme</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9NexT%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">修改NexT主题配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%99%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.</span> <span class="nav-text">站点配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">主题配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E3%80%8C%E6%A0%87%E7%AD%BE%E3%80%8D%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">添加「标签」页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E3%80%8C%E5%88%86%E7%B1%BB%E3%80%8D%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.4.</span> <span class="nav-text">添加「分类」页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%9D%97"><span class="nav-number">2.5.</span> <span class="nav-text">代码块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">2.6.</span> <span class="nav-text">字体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%8D%9A%E5%AE%A2"><span class="nav-number">3.</span> <span class="nav-text">写博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%96%87%E6%A1%A3%E6%A8%A1%E6%9D%BF"><span class="nav-number">3.1.</span> <span class="nav-text">修改文档模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0"><span class="nav-number">3.2.</span> <span class="nav-text">添加文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%EF%BC%8C%E5%88%86%E7%B1%BB"><span class="nav-number">3.3.</span> <span class="nav-text">标签，分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E9%87%8C%E7%9A%84%E5%9B%BE%E7%89%87%E8%B7%AF%E5%BE%84"><span class="nav-number">3.4.</span> <span class="nav-text">文档里的图片路径</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#github-%E9%83%A8%E7%BD%B2"><span class="nav-number">4.</span> <span class="nav-text">github 部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iticd</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iticd.github.io/2020/08/25/hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88theme-next%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iticd">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iticd">
+    </span>
+
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          hexo个人博客搭建（theme next）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-25 11:13:27" itemprop="dateCreated datePublished" datetime="2020-08-25T11:13:27+08:00">2020-08-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-08 18:04:01" itemprop="dateModified" datetime="2021-01-08T18:04:01+08:00">2021-01-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">个人博客系统</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%B3%BB%E7%BB%9F/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><img src="https://s1.ax1x.com/2020/08/26/dfQ7Px.png" alt="hexo next"></p>
+<p><em>以前使用docsify管理文档，如果个人使用，功能基本满足要求，但docify的显示theme不能令我满意。</em><br><em>最近发现了<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>搭建博客的介绍，并且相关开发人员比较活跃，决定尝试一下。</em><br><em>开始阅读hexo的文档有些迷糊，后来看过其它文章，才渐渐明白hexo的使用，与相关主题的使用密不可分，可能用到最后，都是自己开发适合自己的theme……</em><br><em>我选择了一个比较喜欢的主题<a target="_blank" rel="noopener" href="https://github.com/tufu9441/maupassant-hexo">maupassant</a>,试用后，感觉作者的活跃度不够，很多地方不是很理想，最后还是使用用户比较多的<a target="_blank" rel="noopener" href="https://theme-next.js.org/">NexT</a>主题。</em></p>
+<a id="more"></a>
+
+<h2 id="文档项目创建"><a href="#文档项目创建" class="headerlink" title="文档项目创建"></a>文档项目创建</h2><h3 id="初始化hexo目录"><a href="#初始化hexo目录" class="headerlink" title="初始化hexo目录"></a>初始化hexo目录</h3><p>主要步骤<a target="_blank" rel="noopener" href="https://hexo.io/">Hexo 首页</a>上列出：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-cli -g
+hexo init blog
+<span class="token builtin class-name">cd</span> blog
+<span class="token function">npm</span> <span class="token function">install</span>
+hexo server</code></pre>
+
+<p>Hexo init生成的目录文件说明参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/setup">Hexo doc 建站</a></p>
+<h3 id="添加git管理"><a href="#添加git管理" class="headerlink" title="添加git管理"></a>添加git管理</h3><p>考虑到备份，修改等需要，将hexo文档目录添加git管理</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> init</code></pre>
+
+<p>网上有几种git管理theme的方式：</p>
+<ul>
+<li>直接从github下载主题zip，添加到自己的git服务器中</li>
+<li>使用外部配置，替换theme中的默认_config.yml,参考：<a target="_blank" rel="noopener" href="https://yc2007.xyz/2018/07/18/Hexo-Theme-NexT%E4%B8%BB%E9%A2%98%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AE%BE%E7%BD%AE%EF%BC%9A%E8%AE%BAtheme_config%E4%B8%8Enext.yml%E6%96%B9%E6%B3%95%E7%9A%84%E5%B7%AE%E5%BC%82%E5%8F%8A%E5%8F%96%E8%88%8D/">Hexo-Theme-NexT主题自定义设置：论theme_config与next.yml方法的差异及取舍</a>，这个时候theme的源码可以试用git submodule管理：</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">git</span> submodule <span class="token function">add</span> https://github.com/tufu9441/maupassant-hexo.git themes/maupassant</code></pre>
+
+<ul>
+<li>使用npm添加（hexo 5.0版本以上）,<a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/getting-started/">例如NexT的添加</a>:</li>
+</ul>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-theme-next
+<span class="token comment"># _config.yml</span>
+<span class="token comment"># theme: next</span></code></pre>
+
+<h3 id="添加-NexT-theme"><a href="#添加-NexT-theme" class="headerlink" title="添加 NexT theme"></a>添加 NexT theme</h3><p>从 <a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a>查找主题next，获取github路径：</p>
+<pre class="language-html" data-language="html"><code class="language-html">The upstream repository of theme NexT has been changed.
+2014-2017	https://github.com/iissnan/hexo-theme-next
+2018-2019	https://github.com/theme-next/hexo-theme-next
+2020	https://github.com/next-theme/hexo-theme-next
+In order to get the latest update, please backup files of the legacy theme NexT, and execute the following command
+
+            
+                git clone https://github.com/next-theme/hexo-theme-next themes/next
+            
+        
+For Hexo 5.0 or later
+            
+                npm install hexo-theme-next
+            
+        
+Documentation</code></pre>
+
+<p>下载最后发布版本源码zip，解压缩到themes/next目录</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://yc2007.xyz/2018/07/18/Hexo-Theme-NexT%E4%B8%BB%E9%A2%98%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AE%BE%E7%BD%AE%EF%BC%9A%E8%AE%BAtheme_config%E4%B8%8Enext.yml%E6%96%B9%E6%B3%95%E7%9A%84%E5%B7%AE%E5%BC%82%E5%8F%8A%E5%8F%96%E8%88%8D/">Hexo-Theme-NexT主题自定义设置：论theme_config与next.yml方法的差异及取舍</a></p>
+<blockquote>
+<p>几种使用theme的方式，最后还是采用源码方式（有时可能需要直接修改源码比较方便）</p>
+</blockquote>
+<h2 id="修改NexT主题配置"><a href="#修改NexT主题配置" class="headerlink" title="修改NexT主题配置"></a>修改NexT主题配置</h2><p><a target="_blank" rel="noopener" href="http://theme-next.iissnan.com/getting-started.html">NexT doc Made by IIssNan</a></p>
+<p>Hexo的配置修改，包括_config.yml中的站点配置，还有_config.next.yml中的主题配置</p>
+<h3 id="站点配置"><a href="#站点配置" class="headerlink" title="站点配置"></a>站点配置</h3><pre class="language-diff" data-language="diff"><code class="language-diff">diff --git a/_config.yml b/_config.yml
+index 98bf35f..0b7181e 100644
+<span class="token coord">--- a/_config.yml</span>
+<span class="token coord">+++ b/_config.yml</span>
+<span class="token coord">@@ -3,17 +3,17 @@</span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">## Source: https://github.com/hexojs/hexo/
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"># Site
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">title: Hexo
+</span><span class="token prefix deleted">-</span><span class="token line">subtitle: ''
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">title: iticd
+</span><span class="token prefix inserted">+</span><span class="token line">subtitle: '一年又一年…… 知而不行，是为不知；行而不知，可以致知'
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">description: ''
+</span><span class="token prefix unchanged"> </span><span class="token line">keywords:
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">author: John Doe
+</span><span class="token prefix deleted">-</span><span class="token line">language: en
+</span><span class="token prefix deleted">-</span><span class="token line">timezone: ''
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">author: iticd
+</span><span class="token prefix inserted">+</span><span class="token line">language: zh-CN
+</span><span class="token prefix inserted">+</span><span class="token line">timezone: 'Asia/Shanghai'
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"># URL
+</span><span class="token prefix unchanged"> </span><span class="token line">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">url: http://yoursite.com
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">url: http://iticd.github.io
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">root: /
+</span><span class="token prefix unchanged"> </span><span class="token line">permalink: :year/:month/:day/:title/
+</span><span class="token prefix unchanged"> </span><span class="token line">permalink_defaults:
+</span></span>@@ -28,7 +28,7 @@ tag_dir: tags
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">archive_dir: archives
+</span><span class="token prefix unchanged"> </span><span class="token line">category_dir: categories
+</span><span class="token prefix unchanged"> </span><span class="token line">code_dir: downloads/code
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">i18n_dir: :lang
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">i18n_dir: :languages
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">skip_render:
+</span></span>
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line"># Writing
+</span></span>@@ -52,7 +52,7 @@ highlight:
+<span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  wrap: true
+</span><span class="token prefix unchanged"> </span><span class="token line">  hljs: false
+</span><span class="token prefix unchanged"> </span><span class="token line">prismjs:
+</span></span><span class="token deleted-sign deleted"><span class="token prefix deleted">-</span><span class="token line">  enable: false
+</span></span><span class="token inserted-sign inserted"><span class="token prefix inserted">+</span><span class="token line">  enable: true
+</span></span><span class="token unchanged"><span class="token prefix unchanged"> </span><span class="token line">  preprocess: true
+</span><span class="token prefix unchanged"> </span><span class="token line">  line_number: true
+</span><span class="token prefix unchanged"> </span><span class="token line">  tab_replace: ''</span></span></code></pre>
+
+<h3 id="主题配置"><a href="#主题配置" class="headerlink" title="主题配置"></a>主题配置</h3><h3 id="添加「标签」页面"><a href="#添加「标签」页面" class="headerlink" title="添加「标签」页面"></a><a target="_blank" rel="noopener" href="https://theme-next.iissnan.com/theme-settings.html#tags-page">添加「标签」页面</a></h3><h3 id="添加「分类」页面"><a href="#添加「分类」页面" class="headerlink" title="添加「分类」页面"></a><a target="_blank" rel="noopener" href="https://theme-next.iissnan.com/theme-settings.html#categories-page">添加「分类」页面</a></h3><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>通过预览<a target="_blank" rel="noopener" href="https://theme-next.js.org/highlight/">NexT Highlight Theme Preview</a>，选择代码高亮样式：</p>
+<p>站点配置修改：</p>
+<pre class="language-yaml" data-language="yaml"><div class="caption"><span>hexo/_config.yml</span></div><code class="language-yaml"><span class="token key atrule">highlight</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">false</span>
+  <span class="token punctuation">...</span>
+<span class="token key atrule">prismjs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">enable</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+  <span class="token punctuation">...</span></code></pre>
+
+<p>主题配置修改：</p>
+<pre class="language-yaml" data-language="yaml"><div class="caption"><span>hexo/theme/next/_config.yml</span></div><code class="language-yaml"><span class="token key atrule">codeblock</span><span class="token punctuation">:</span>
+<span class="token comment"># Code Highlight theme</span>
+<span class="token comment"># All available themes: https://theme-next.js.org/highlight/</span>
+  <span class="token punctuation">...</span>
+  <span class="token key atrule">prism</span><span class="token punctuation">:</span>
+    <span class="token key atrule">light</span><span class="token punctuation">:</span> prism<span class="token punctuation">-</span>tomorrow
+    <span class="token key atrule">dark</span><span class="token punctuation">:</span> prism<span class="token punctuation">-</span>tomorrow
+  <span class="token punctuation">...</span></code></pre>
+
+<h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p><a target="_blank" rel="noopener" href="https://leay.net/2020/02/14/hexo-next-font/">Hexo Next 主题字体相关配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://theme-next.js.org/docs/theme-settings/miscellaneous.html#Fonts-Customization">Fonts-Customization</a></p>
+<p>修改字体，字号：</p>
+<pre class="language-yaml" data-language="yaml"><code class="language-yaml">
+<span class="token comment"># Define custom file paths.</span>
+<span class="token comment"># Create your custom files in site directory `source/_data` and uncomment needed files below.</span>
+<span class="token key atrule">custom_file_path</span><span class="token punctuation">:</span>
+  <span class="token comment">#head: source/_data/head.njk</span>
+  <span class="token comment">#header: source/_data/header.njk</span>
+  <span class="token comment">#sidebar: source/_data/sidebar.njk</span>
+  <span class="token comment">#postMeta: source/_data/post-meta.njk</span>
+  <span class="token comment">#postBodyEnd: source/_data/post-body-end.njk</span>
+  <span class="token comment">#footer: source/_data/footer.njk</span>
+  <span class="token comment">#bodyEnd: source/_data/body-end.njk</span>
+  <span class="token key atrule">variable</span><span class="token punctuation">:</span> source/_data/variables.styl
+  <span class="token comment">#mixin: source/_data/mixins.styl</span>
+  <span class="token comment">#style: source/_data/styles.styl</span></code></pre>
+
+<p>在source/_data/variables.styl中配置字体属性，避免修改next源码：</p>
+<pre class="language-styl" data-language="styl"><code class="language-styl">&#x2F;&#x2F; Title Font, set it to font family you want.
+$font-family-headings &#x3D; Georgia, sans
+
+&#x2F;&#x2F; Set it to font family you want.
+$font-family-base &#x3D; &quot;Microsoft YaHei&quot;, Verdana, sans-serif
+
+&#x2F;&#x2F; Code Font.
+$code-font-family &#x3D; &quot;Input Mono&quot;, &quot;PT Mono&quot;, Consolas, Monaco, Menlo, monospace
+
+&#x2F;&#x2F; Font size of articles.
+$font-size-base &#x3D; 14px
+
+&#x2F;&#x2F; Font size of table and code.
+$table-font-size &#x3D; 12px</code></pre>
+
+<blockquote>
+<p>Next 能加载用户自定义的样式，同样也能加载用户自定义样式使用的变量。然而同样比较可惜的是，自定义样式使用的变量里的定义（source/_data/variables.styl），不能覆盖变量默认定义的值（hexo-next-theme/source/css/_variables/）。但是你可以在默认定义里注释掉变量后，在自定义变量里重新定义并赋值。</p>
+</blockquote>
+<h2 id="写博客"><a href="#写博客" class="headerlink" title="写博客"></a>写博客</h2><h3 id="修改文档模板"><a href="#修改文档模板" class="headerlink" title="修改文档模板"></a>修改文档模板</h3><p>根据需要，修改Hexo目录下生成的文档模板，scaffolds/draft.md，scaffolds/post.md</p>
+<pre class="language-md" data-language="md"><code class="language-md">---
+title: &#123;&#123; title &#125;&#125;
+date: &#123;&#123;date&#125;&#125;
+update: &#123;&#123;date&#125;&#125;
+tags:
+categories:
+---
+</code></pre>
+
+<h3 id="添加文章"><a href="#添加文章" class="headerlink" title="添加文章"></a>添加文章</h3><p>添加博客文章，执行：</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">hexo new  post <span class="token operator">&lt;</span>title<span class="token operator">></span></code></pre>
+
+<p>在source/_posts目录生成title.md文件，文章内容直接在md文件中修改，例：</p>
+<pre class="language-md" data-language="md"><code class="language-md">---
+title: hexo个人博客搭建（theme next）
+date: 2020-08-25 11:13:27
+updated: &#123;&#123;date&#125;&#125;
+tags:
+- Hexo
+- 个人博客
+categories:
+- 个人博客系统
+- Hexo
+---
+
+这里填写文章摘要……
+
+&lt;!--more--&gt;
+
+这里填写文章正文……
+</code></pre>
+
+<p>参考 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Hexo doc front-matter</a></p>
+<h3 id="标签，分类"><a href="#标签，分类" class="headerlink" title="标签，分类"></a>标签，分类</h3><h3 id="文档里的图片路径"><a href="#文档里的图片路径" class="headerlink" title="文档里的图片路径"></a>文档里的图片路径</h3><p>使用固定的图片资源目录</p>
+<blockquote>
+<p>资源（Asset）代表 source 文件夹中除了文章以外的所有文件，例如图片、CSS、JS 文件等。比方说，如果你的Hexo项目中只有少量图片，那最简单的方法就是将它们放在 source/images 文件夹中。然后通过类似于<code>![](/images/image.jpg)</code> 的方法访问它们。</p>
+</blockquote>
+<p>使用<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/asset-folders#%E6%96%87%E7%AB%A0%E8%B5%84%E6%BA%90%E6%96%87%E4%BB%B6%E5%A4%B9">文章资源文件夹</a></p>
+<blockquote>
+<p>对于那些想要更有规律地提供图片和其他资源以及想要将他们的资源分布在各个文章上的人来说，Hexo也提供了更组织化的方式来管理资源。这个稍微有些复杂但是管理资源非常方便的功能可以通过将 config.yml 文件中的 post_asset_folder 选项设为 true 来打开。</p>
+</blockquote>
+<p><strong>注：使用vscode进行md文件编辑时，由于路径原因，预览插件显示图片异常。</strong></p>
+<h2 id="github-部署"><a href="#github-部署" class="headerlink" title="github 部署"></a>github 部署</h2><p>修改_config.yml</p>
+<pre class="language-yaml" data-language="yaml"><code class="language-yaml"><span class="token comment"># Deployment</span>
+<span class="token comment">## Docs: https://hexo.io/docs/one-command-deployment</span>
+<span class="token key atrule">deploy</span><span class="token punctuation">:</span>
+  <span class="token key atrule">type</span><span class="token punctuation">:</span> git
+  <span class="token key atrule">repo</span><span class="token punctuation">:</span> 
+    <span class="token key atrule">github</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//github.com/iticd/iticd.github.io.git
+    <span class="token key atrule">gitee</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//gitee.com/iticd/iticd.git
+  <span class="token key atrule">branch</span><span class="token punctuation">:</span> </code></pre>
+
+<p><strong>注：可以同时部署多个站点</strong></p>
+<p>本地安装插件,部署</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">npm</span> <span class="token function">install</span> hexo-deployer-git --save
+
+hexo d</code></pre>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a><br><a target="_blank" rel="noopener" href="https://theme-next.js.org/">Heox theme NexT</a><br><a target="_blank" rel="noopener" href="https://easyhexo.com/">easy hexo</a><br><a target="_blank" rel="noopener" href="https://io-oi.me/tech/hexo-next-optimization/">打造个性超赞博客 Hexo + NexT + GitHub Pages 的超深度优化</a><br><a target="_blank" rel="noopener" href="https://yc2007.xyz/2018/07/18/Hexo-Theme-NexT%E4%B8%BB%E9%A2%98%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AE%BE%E7%BD%AE%EF%BC%9A%E8%AE%BAtheme_config%E4%B8%8Enext.yml%E6%96%B9%E6%B3%95%E7%9A%84%E5%B7%AE%E5%BC%82%E5%8F%8A%E5%8F%96%E8%88%8D/">Hexo-Theme-NexT主题自定义设置：论theme_config与next.yml方法的差异及取舍</a><br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/f8a55b972972">git submodule 使用小结</a><br><a target="_blank" rel="noopener" href="https://wizardforcel.gitbooks.io/markdown-simple-world/content/">Markdown - 简单的世界</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+              <a href="/tags/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" rel="tag"># 个人博客</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/25/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/26/ubuntu%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0%EF%BC%88202008%EF%BC%89/" rel="next" title="ubuntu安装笔记（202008）">
+      ubuntu安装笔记（202008） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iticd</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '45fd556ba2636adfe5a8',
+      clientSecret: '9176b70f8e2d4b8b5abf01b2573883a7f19bf90b',
+      repo        : 'issue',
+      owner       : 'iticd',
+      admin       : ['iticd'],
+      id          : '9eec297d059eef36a603703ca4a4a9e4',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

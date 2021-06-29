@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+  <link rel="stylesheet" href="/lib/animate-css/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"iticd.github.io","root":"/","scheme":"Gemini","version":"8.0.0-rc.5","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false};
+  </script>
+
+  <meta name="description" content="最近安装台PC机，专门用来使用linux系统，最初想尝试一下国产的deepin，感觉还是不理想（面向的是大众用户）。考虑到安装软件的的便利，还是选择了ubuntu20.04这里记录了一些安装步骤，常用软件……">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu安装笔记（202008）">
+<meta property="og:url" content="http://iticd.github.io/2020/08/26/ubuntu%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0%EF%BC%88202008%EF%BC%89/index.html">
+<meta property="og:site_name" content="iticd">
+<meta property="og:description" content="最近安装台PC机，专门用来使用linux系统，最初想尝试一下国产的deepin，感觉还是不理想（面向的是大众用户）。考虑到安装软件的的便利，还是选择了ubuntu20.04这里记录了一些安装步骤，常用软件……">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_720/https://ubuntu.com/wp-content/uploads/a728/2020-04-23-13.05.21.jpg">
+<meta property="og:image" content="https://gitee.com/iticd/im/raw/master/images/2021/image-20200816080645434.png">
+<meta property="article:published_time" content="2020-08-26T10:32:46.000Z">
+<meta property="article:modified_time" content="2021-06-19T08:28:08.274Z">
+<meta property="article:author" content="iticd">
+<meta property="article:tag" content="系统维护">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_720/https://ubuntu.com/wp-content/uploads/a728/2020-04-23-13.05.21.jpg">
+
+<link rel="canonical" href="http://iticd.github.io/2020/08/26/ubuntu%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0%EF%BC%88202008%EF%BC%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ubuntu安装笔记（202008） | iticd</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <main class="main">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">iticd</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">一年又一年…… 知而不行，是为不知；行而不知，可以致知</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-download">
+
+    <a href="/download/" rel="section"><i class="fa fa-download fa-fw"></i>下载</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#iso%E5%AE%89%E8%A3%85%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">iso安装文件下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#usb%E5%90%AF%E5%8A%A8%E7%9B%98%E5%88%B6%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">usb启动盘制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">系统安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%8F%82%E8%80%83"><span class="nav-number">3.1.</span> <span class="nav-text">安装参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.2.</span> <span class="nav-text">常用软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Chrome%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">Chrome安装方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vim"><span class="nav-number">3.2.2.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ubuntu%E8%87%AA%E5%B8%A6%E6%88%AA%E5%9B%BE%E5%B7%A5%E5%85%B7"><span class="nav-number">3.2.3.</span> <span class="nav-text">ubuntu自带截图工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WPS-Office"><span class="nav-number">3.2.4.</span> <span class="nav-text">WPS Office</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6%E8%BE%93%E5%85%A5%E6%B3%95"><span class="nav-number">3.2.5.</span> <span class="nav-text">百度输入法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown-typora"><span class="nav-number">3.2.6.</span> <span class="nav-text">markdown typora</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#vscode"><span class="nav-number">3.2.7.</span> <span class="nav-text">vscode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker"><span class="nav-number">3.2.8.</span> <span class="nav-text">docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88c-c-nodejs-python%EF%BC%89"><span class="nav-number">3.2.9.</span> <span class="nav-text">开发环境（c&#x2F;c++ nodejs python）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git"><span class="nav-number">3.2.10.</span> <span class="nav-text">git</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E5%AE%83"><span class="nav-number">3.3.</span> <span class="nav-text">其它</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4"><span class="nav-number">4.</span> <span class="nav-text">系统维护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">4.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB%EF%BC%88smb%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">网络共享（smb）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD-SMB1-0-CIFS-%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB"><span class="nav-number">4.2.1.</span> <span class="nav-text">挂载 SMB1.0&#x2F;CIFS 文件共享</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#smb3"><span class="nav-number">4.2.2.</span> <span class="nav-text">smb3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86"><span class="nav-number">4.3.</span> <span class="nav-text">磁盘管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows-Linux-%E9%87%8D%E5%90%AF%E8%BF%9B%E5%85%A5-UEFI-BIOS%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.4.</span> <span class="nav-text">Windows&#x2F;Linux 重启进入 UEFI BIOS设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">iticd</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </header>
+
+      
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div id="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+      <div class="main-inner">
+        
+
+        <div class="content post posts-expand">
+          
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://iticd.github.io/2020/08/26/ubuntu%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0%EF%BC%88202008%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="iticd">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="iticd">
+    </span>
+
+    
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ubuntu安装笔记（202008）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-26 18:32:46" itemprop="dateCreated datePublished" datetime="2020-08-26T18:32:46+08:00">2020-08-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-19 16:28:08" itemprop="dateModified" datetime="2021-06-19T16:28:08+08:00">2021-06-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index"><span itemprop="name">linux</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/ubuntu/" itemprop="url" rel="index"><span itemprop="name">ubuntu</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><a target="_blank" rel="noopener" href="https://ubuntu.com/blog/ubuntu-20-04-lts-arrives" title="ubuntu20.04"><img src="https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,w_720/https://ubuntu.com/wp-content/uploads/a728/2020-04-23-13.05.21.jpg" alt="ubuntu20.04" title="ubuntu20.04"></a></p>
+<blockquote>
+<p><em>最近安装台PC机，专门用来使用linux系统，最初想尝试一下国产的deepin，感觉还是不理想（面向的是大众用户）。</em><br><em>考虑到安装软件的的便利，还是选择了ubuntu20.04</em><br><em>这里记录了一些安装步骤，常用软件……</em></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="iso安装文件下载"><a href="#iso安装文件下载" class="headerlink" title="iso安装文件下载"></a>iso安装文件下载</h2><p><a target="_blank" rel="noopener" href="http://mirrors.ustc.edu.cn/ubuntu-releases/20.04/">http://mirrors.ustc.edu.cn/ubuntu-releases/20.04/</a></p>
+<h2 id="usb启动盘制作"><a href="#usb启动盘制作" class="headerlink" title="usb启动盘制作"></a>usb启动盘制作</h2><p><a target="_blank" rel="noopener" href="https://rufus.ie/">windows启动盘制作工具rufus</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.qingsword.com/qing/85.html">Linux环境怎样制作u盘系统启动盘</a></p>
+<h2 id="系统安装"><a href="#系统安装" class="headerlink" title="系统安装"></a>系统安装</h2><h3 id="安装参考"><a href="#安装参考" class="headerlink" title="安装参考"></a><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/141946341">安装参考</a></h3><ul>
+<li><p>语言选择english（如果选择中文，用户默认的几个目录会使用中文初始化）</p>
+</li>
+<li><p>更新和其它软件选项——选最小安装（文件处理以后安装wps） </p>
+</li>
+<li><p>安装分区</p>
+</li>
+</ul>
+<p>我的系统有两块硬盘(一块ssd，一块hdd)，采用手动分区。(分区方案参考<a target="_blank" rel="noopener" href="https://www.linuxrumen.com/rmxx/1119.html">linux最佳分区方案</a>)</p>
+<table>
+<thead>
+<tr>
+<th>分区</th>
+<th>大小</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>efl</td>
+<td>&gt;=300M</td>
+<td>ssd硬盘</td>
+</tr>
+<tr>
+<td>/</td>
+<td>ssd剩余空间</td>
+<td></td>
+</tr>
+<tr>
+<td>/home</td>
+<td>hdd磁盘空间</td>
+<td></td>
+</tr>
+</tbody></table>
+<ul>
+<li>软件更新</li>
+</ul>
+<p>先设置国内源（aliyun）：</p>
+<p><img src="https://gitee.com/iticd/im/raw/master/images/2021/image-20200816080645434.png" alt="image-20200816080645434"></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 更新系统</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> update
+<span class="token function">sudo</span> <span class="token function">apt</span> upgrade</code></pre>
+
+<ul>
+<li>修改dns</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://www.wangzhengzhen.com/?p=2349">Ubuntu禁用Systemd解析</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">service</span> systemd-resolved stop
+<span class="token function">sudo</span> systemctl disable systemd-resolved
+<span class="token function">sudo</span> <span class="token function">vim</span> /etc/NetworkManager/NetworkManager.conf 
+<span class="token comment"># [main] 部分新增：dns=default</span>
+<span class="token function">sudo</span> <span class="token function">rm</span> /etc/resolv.conf
+<span class="token function">sudo</span> <span class="token function">service</span> network-manager restart</code></pre>
+
+<p><strong>注：如果网卡使用的dhcp获取IP，此时dns使用的dhcp中相关配置</strong></p>
+<h3 id="常用软件"><a href="#常用软件" class="headerlink" title="常用软件"></a>常用软件</h3><h4 id="Chrome安装方法"><a href="#Chrome安装方法" class="headerlink" title="Chrome安装方法"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/sdujava2011/article/details/50880663">Chrome安装方法</a></h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+<span class="token function">sudo</span> dpkg -i google-chrome-stable_current_amd64.deb</code></pre>
+
+<p>chrome扩展</p>
+<p><a target="_blank" rel="noopener" href="https://www.ggfwzs.com/">google访问助手</a></p>
+<p><a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/aria2-for-chrome/mpkodccbngfoacfalldjimigbofkhgjn?hl=zh-CN">Aria2 for Chrome</a></p>
+<h4 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h4><pre class="language-none"><code class="language-none">sudo apt install vim
+echo &quot;set nu&quot; &gt;&gt; ~&#x2F;.vimrc</code></pre>
+
+<h4 id="ubuntu自带截图工具"><a href="#ubuntu自带截图工具" class="headerlink" title="ubuntu自带截图工具"></a><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38880380/article/details/78233687">ubuntu自带截图工具</a></h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45919661">在 Linux 下截屏并编辑的最佳工具</a></p>
+<ul>
+<li><code>PrtSc</code> – 获取整个屏幕的截图并保存到 Pictures 目录。</li>
+<li><code>Shift + PrtSc</code> – 获取屏幕的某个区域截图并保存到 Pictures 目录。</li>
+<li><code>Alt + PrtSc</code> –获取当前窗口的截图并保存到 Pictures 目录。</li>
+<li><code>Ctrl + PrtSc</code> – 获取整个屏幕的截图并存放到剪贴板。</li>
+<li><code>Shift + Ctrl + PrtSc</code> – 获取屏幕的某个区域截图并存放到剪贴板。</li>
+<li><code>Ctrl + Alt + PrtSc</code> – 获取当前窗口的 截图并存放到剪贴板。</li>
+</ul>
+<h4 id="WPS-Office"><a href="#WPS-Office" class="headerlink" title="WPS Office"></a>WPS Office</h4><p><a target="_blank" rel="noopener" href="https://linux.wps.cn/">下载</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">wget</span> https://wdl1.cache.wps.cn/wps/download/ep/Linux2019/9615/wps-office_11.1.0.9615_amd64.deb
+<span class="token function">sudo</span> dpkg -i wps-office_11.1.0.9615_amd64.deb</code></pre>
+
+<h4 id="百度输入法"><a href="#百度输入法" class="headerlink" title="百度输入法"></a>百度输入法</h4><p><a target="_blank" rel="noopener" href="http://srf.baidu.com/site/guanwang_linux/index.html">下载</a></p>
+<p>参考下载文件中安装说明</p>
+<h4 id="markdown-typora"><a href="#markdown-typora" class="headerlink" title="markdown typora"></a><a target="_blank" rel="noopener" href="https://www.typora.io/#linux">markdown typora</a></h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># or run:</span>
+<span class="token comment"># sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys BA300B7755AFCFAE</span>
+
+<span class="token function">wget</span> -qO - https://typora.io/linux/public-key.asc <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
+
+<span class="token comment"># add Typora's repository</span>
+
+<span class="token function">sudo</span> add-apt-repository <span class="token string">'deb https://typora.io/linux ./'</span>
+
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+
+<span class="token comment"># install typora</span>
+
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> typora</code></pre>
+
+<h4 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h4><p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/download">https://code.visualstudio.com/download</a></p>
+<p>几款常用插件（现在有了配置同步功能，换机器使用vscode时，也能比较方便的配置）：</p>
+<p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=RK.bookmarksng">BookmarksNG</a><br><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome">Debugger for Chrome</a><br><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">Markdown All in One</a><br><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced">Markdown Preview Enhancede</a></p>
+<h4 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h4><p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">ubuntu install docker </a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/docker-ce?spm=a2c6h.13651102.0.0.3e221b114tQwSF">阿里云 Docker CE 镜像</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token punctuation">\</span>
+    apt-transport-https <span class="token punctuation">\</span>
+    ca-certificates <span class="token punctuation">\</span>
+    <span class="token function">curl</span> <span class="token punctuation">\</span>
+    gnupg-agent <span class="token punctuation">\</span>
+    software-properties-common
+<span class="token comment"># curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -</span>
+<span class="token comment"># 使用阿里镜像</span>
+<span class="token function">curl</span> -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg <span class="token operator">|</span> <span class="token function">sudo</span> apt-key <span class="token function">add</span> -
+<span class="token comment"># sudo apt-key fingerprint 0EBFCD88</span>
+<span class="token comment"># sudo add-apt-repository  "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"</span>
+<span class="token comment"># 使用阿里镜像</span>
+<span class="token function">sudo</span> add-apt-repository <span class="token string">"deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu <span class="token variable"><span class="token variable">$(</span>lsb_release -cs<span class="token variable">)</span></span> stable"</span>
+
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> docker-ce docker-ce-cli containerd.io
+
+<span class="token comment"># [Manage Docker as a non-root user](https://docs.docker.com/engine/install/linux-postinstall/)</span>
+<span class="token function">sudo</span> <span class="token function">groupadd</span> docker
+<span class="token function">sudo</span> <span class="token function">usermod</span> -aG docker <span class="token environment constant">$USER</span>
+newgrp docker </code></pre>
+
+<p>[<a target="_blank" rel="noopener" href="https://www.cnblogs.com/kaishirenshi/p/10396446.html">docker参数–restart=always的作用</a>]</p>
+<ul>
+<li><p>aria2</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">docker run -d <span class="token punctuation">\</span>
+    --name aria2-pro <span class="token punctuation">\</span>
+    --restart unless-stopped <span class="token punctuation">\</span>
+    --log-opt max-size<span class="token operator">=</span>1m <span class="token punctuation">\</span>
+    --network <span class="token function">host</span> <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">PUID</span><span class="token operator">=</span><span class="token environment constant">$UID</span> <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">PGID</span><span class="token operator">=</span><span class="token variable">$GID</span> <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">RPC_SECRET</span><span class="token operator">=</span>0a914b8a-d856-11ea-aeff-47211fb00d9e <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">RPC_PORT</span><span class="token operator">=</span><span class="token number">6800</span> <span class="token punctuation">\</span>
+    -e <span class="token assign-left variable">LISTEN_PORT</span><span class="token operator">=</span><span class="token number">6888</span> <span class="token punctuation">\</span>
+    -v ~/aria2-config:/config <span class="token punctuation">\</span>
+    -v ~/aria2-downloads:/downloads <span class="token punctuation">\</span>
+    p3terx/aria2-pro</code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/2c6d938f4382">linux编译安装aria2，远程下载设置</a></p>
+</li>
+<li><p>portainer</p>
+<pre class="language-none"><code class="language-none">docker run -d -p 9000:9000 \
+    --restart&#x3D;always \
+    -v &#x2F;var&#x2F;run&#x2F;docker.sock:&#x2F;var&#x2F;run&#x2F;docker.sock \
+    --name prtainer-test \
+    docker.io&#x2F;portainer&#x2F;portainer</code></pre>
+</li>
+<li><p>gitea</p>
+<pre class="language-none"><code class="language-none">docker pull gitea&#x2F;gitea:latest
+sudo mkdir -p &#x2F;var&#x2F;lib&#x2F;gitea
+docker run -d --restart&#x3D;always --name&#x3D;gitea -p 10022:22 -p 10080:3000 -v &#x2F;var&#x2F;lib&#x2F;gitea:&#x2F;data gitea&#x2F;gitea:latest</code></pre>
+
+</li>
+</ul>
+<h4 id="开发环境（c-c-nodejs-python）"><a href="#开发环境（c-c-nodejs-python）" class="headerlink" title="开发环境（c/c++ nodejs python）"></a>开发环境（c/c++ nodejs python）</h4><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># nodejs https://nodejs.org/zh-cn/</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nodejs
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">npm</span>
+<span class="token comment"># c c++</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> build-essential</code></pre>
+
+<h4 id="git"><a href="#git" class="headerlink" title="git"></a>git</h4><p><a target="_blank" rel="noopener" href="https://git-scm.com/download/linux">最新版本</a></p>
+<p> <a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2">git book</a> </p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">git</span>
+<span class="token comment">## 全局配置</span>
+<span class="token function">git</span> config --global user.name “username”
+<span class="token function">git</span> config --global user.email “email”
+<span class="token comment"># 避免 fatal: The remote end hung up unexpectedly的错误</span>
+<span class="token function">git</span> config --global http.postBuffer <span class="token number">524288000</span>
+<span class="token comment"># 保存用户名密码</span>
+<span class="token function">git</span> config --global credential.helper store
+<span class="token comment"># git pull</span>
+<span class="token comment"># 要求输入用户名(邮箱)+密码，git自动保存</span>
+
+<span class="token comment"># 重置用户名+密码</span>
+<span class="token comment"># git config --system --unset credential.helper</span></code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/volnet/p/git-credentials.html">Git凭证存储（简单易懂，一学就会，认真看）</a></p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 网速监视</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> iptraf-ng</code></pre>
+
+<h2 id="系统维护"><a href="#系统维护" class="headerlink" title="系统维护"></a>系统维护</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># Linux on UEFI - how to reboot to the UEFI setup screen like Windows 8 can?</span>
+systemctl <span class="token function">reboot</span> --firmware-setup
+
+<span class="token comment"># 关闭ubuntu显示器</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> gnome-screensaver
+<span class="token function">sleep</span> 2s <span class="token punctuation">;</span> gnome-screensaver-command -a
+<span class="token comment"># 或</span>
+<span class="token function">sleep</span> 2s <span class="token punctuation">;</span> xset dpms force off </code></pre>
+
+<p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2019/08/xargs-tutorial.html">xargs 命令教程</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.it-swarm.dev/zh/apt/apt%E6%90%9C%E7%B4%A2%EF%BC%9A%E5%AE%8C%E5%85%A8%E5%8C%B9%E9%85%8D%E7%9A%84%E9%99%90%E5%88%B6/961159003/">apt搜索：完全匹配的限制</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">apt</span> search --names-only python	</code></pre>
+
+<h3 id="网络共享（smb）"><a href="#网络共享（smb）" class="headerlink" title="网络共享（smb）"></a>网络共享（smb）</h3><pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> cifs-utils
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> smbclient </code></pre>
+
+<h4 id="挂载-SMB1-0-CIFS-文件共享"><a href="#挂载-SMB1-0-CIFS-文件共享" class="headerlink" title="挂载 SMB1.0/CIFS 文件共享"></a>挂载 SMB1.0/CIFS 文件共享</h4><p>查看共享资源 </p>
+<pre class="language-bash" data-language="bash"><code class="language-bash">smbclient -L <span class="token number">192.168</span>.3.1 --option<span class="token operator">=</span><span class="token string">'client min protocol=nt1'</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token punctuation">[</span>guolu@iticd ~<span class="token punctuation">]</span>$ smbclient -L <span class="token number">192.168</span>.3.1 --option<span class="token operator">=</span><span class="token string">'client min protocol=nt1'</span>
+Unable to initialize messaging context
+Enter SAMBA<span class="token punctuation">\</span>guolu's password: 
+
+	Sharename       Type      Comment
+	---------       ----      -------
+	YuanTech_usb1_1 Disk      
+	YuanTech_usb2_1 Disk      
+	IPC$            IPC       IPC Service <span class="token punctuation">(</span>samba server<span class="token punctuation">)</span>
+Reconnecting with SMB1 <span class="token keyword">for</span> workgroup listing.
+
+	Server               Comment
+	---------            -------
+	HONORROUTERPRO2      samba server
+
+	Workgroup            Master
+	---------            -------
+	WORKGROUP            HONORROUTERPRO2
+</code></pre>
+
+<p>挂载共享资源</p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># sudo yum install cifs-utils</span>
+
+<span class="token function">sudo</span> mount.cifs -o <span class="token assign-left variable">user</span><span class="token operator">=</span>guest,pass<span class="token operator">=</span>,vers<span class="token operator">=</span><span class="token number">1.0</span> //192.168.3.1/YuanTech_usb2_1 /mnt/udisk1
+</code></pre>
+
+<p>添加/etc/fstab中自动挂载</p>
+<pre class="language-ini" data-language="ini"><code class="language-ini">//192.168.3.1/YuanTech_usb1_1  /mnt/udisk1 cifs user,uid<span class="token attr-value"><span class="token punctuation">=</span>500,rw,suid,username="guest",password="",vers=1.0  0 0</span>
+
+//192.168.3.1/YuanTech_usb2_1  /mnt/udisk2 cifs user,uid<span class="token attr-value"><span class="token punctuation">=</span>500,rw,suid,username="guest",password="",vers=1.0  0 0</span>
+</code></pre>
+
+<h4 id="smb3"><a href="#smb3" class="headerlink" title="smb3"></a>smb3</h4><p><a target="_blank" rel="noopener" href="https://shocksolution.com/2019/10/23/mount-cifs-error-13-after-update-centos-redhat-linux-7-6/">mount.cifs error 13 after update (CentOS/RedHat Linux 7.6)</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_34210740/article/details/91754651">mount.cifs Windows共享目录权限755问题</a></p>
+<h3 id="磁盘管理"><a href="#磁盘管理" class="headerlink" title="磁盘管理"></a>磁盘管理</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/CL_YD/article/details/79458092">Linux磁盘空间100% 查找并删除大文件</a></p>
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 先确定是哪个文件夹占用较多</span>
+<span class="token comment"># 如果文件较多命令执行可能很慢，在知道大概位置的情况下不建议直接对根目录操作</span>
+<span class="token comment"># du的--max-depth=1表示只展示第一个层级的目录和文件</span>
+<span class="token comment"># sort的-h选项和du的-h选项一个意思，-r表示倒叙，默认升序</span>
+<span class="token function">du</span> -h / --max-depth<span class="token operator">=</span><span class="token number">1</span> <span class="token operator">|</span> <span class="token function">sort</span> -hr <span class="token operator">|</span> <span class="token function">head</span> -n <span class="token number">10</span></code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 文件已经删除，但是使用文件的进程还存在，导致空间无法释放		</span>
+<span class="token function">sudo</span> <span class="token function">lsof</span> <span class="token operator">|</span> <span class="token function">grep</span> deleted <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'&#123;print <span class="token variable">$2</span>&#125;'</span> <span class="token operator">|</span> <span class="token function">xargs</span> <span class="token function">sudo</span> <span class="token function">kill</span> -9</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 删除大文件 按文件大小删除</span>
+
+<span class="token comment"># 建一个临时文件夹做测试</span>
+<span class="token builtin class-name">cd</span> /tmp
+<span class="token function">mkdir</span> <span class="token builtin class-name">test</span>
+<span class="token builtin class-name">cd</span> <span class="token builtin class-name">test</span>
+
+<span class="token comment"># 建几个大文件试试</span>
+<span class="token comment"># seek表示跳过文件中指定大小的部分，实际上并没有写入任何数据</span>
+<span class="token comment"># 生成1000G的文件</span>
+<span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/zero <span class="token assign-left variable">of</span><span class="token operator">=</span>test-big1 <span class="token assign-left variable">bs</span><span class="token operator">=</span>1G <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">seek</span><span class="token operator">=</span><span class="token number">1000</span>
+<span class="token comment"># 生成1000M的文件</span>
+<span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/zero <span class="token assign-left variable">of</span><span class="token operator">=</span>test-big2 <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">0</span> <span class="token assign-left variable">seek</span><span class="token operator">=</span><span class="token number">1000</span>
+
+<span class="token comment">#查找 -size参数值中+表示> -表示&lt; 不写表示等于</span>
+<span class="token function">find</span> /tmp/test -type f -size +200M
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+/tmp/test/test-big2
+/tmp/test/test-big1
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+
+<span class="token function">find</span> /tmp/test -type f -size +2000M
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+/tmp/test/test-big1
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+
+<span class="token function">find</span> /tmp/test -type f -size -2000M
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+/tmp/test/test-big2
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+
+<span class="token comment"># 删除</span>
+<span class="token comment"># &#123;&#125; \;不能丢</span>
+<span class="token function">find</span> /tmp/test -type f -size +2000M -exec <span class="token function">rm</span> -rf <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">\</span><span class="token punctuation">;</span>
+<span class="token function">ls</span>
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+test-big2
+<span class="token comment">#output>>>>>>>>>>>>>>></span>
+</code></pre>
+
+<pre class="language-bash" data-language="bash"><code class="language-bash"><span class="token comment"># 按时间和名称删除</span>
+<span class="token comment"># 删除修改时间距今超过10天的以.gz结尾的文件</span>
+<span class="token comment"># -mtime参数值中 0表示修改时间在24小时内 +x表示修改时间距今超过x天 -x表示距今少于x天 不写正负号表示等于</span>
+<span class="token function">find</span> tmp/test/* -mtime +10  -name <span class="token string">"*.gz"</span> -exec <span class="token function">rm</span> -rf <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token punctuation">\</span><span class="token punctuation">;</span></code></pre>
+
+<h3 id="Windows-Linux-重启进入-UEFI-BIOS设置"><a href="#Windows-Linux-重启进入-UEFI-BIOS设置" class="headerlink" title="Windows/Linux 重启进入 UEFI BIOS设置"></a><a target="_blank" rel="noopener" href="https://www.qiansw.com/linux-on-uefi-how-to-reboot-to-the-uefi-setup-screen-like-windows.html">Windows/Linux 重启进入 UEFI BIOS设置</a></h3><pre class="language-sell" data-language="sell"><code class="language-sell"># 直接在命令行执行下面命令即可在下一次启动后进入 UEFI 设置。
+
+systemctl reboot --firmware-setup</code></pre>
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/141946341">Ubuntu20.04 LTS入坑指南</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2019-08/159849.htm">如何在 Ubuntu 18.04 上安装和配置 VNC</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/catshitone/article/details/103181202">【Linux】win10 vnc远程连接ubuntu server 18.04 gnome桌面</a></p>
+<p><a target="_blank" rel="noopener" href="https://tstrs.me/838.html">Ubuntu如何正确的切换Intel和Nvidia显卡</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45919661">在 Linux 下截屏并编辑的最佳工具</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.junmajinlong.com/shell/index/">骏马金龙：Shell系列文章</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.junmajinlong.com/linux/index/">骏马金龙：Linux系列文章</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4/" rel="tag"># 系统维护</a>
+              <a href="/tags/linux/" rel="tag"># linux</a>
+              <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/25/hexo%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%EF%BC%88theme-next%EF%BC%89/" rel="prev" title="hexo个人博客搭建（theme next）">
+      <i class="fa fa-chevron-left"></i> hexo个人博客搭建（theme next）
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/26/%E4%B8%80%E5%B9%B4%E5%8F%88%E4%B8%80%E5%B9%B4-2020-08/" rel="next" title="一年又一年 2020-08">
+      一年又一年 2020-08 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+        </div>
+        
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">iticd</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments('#gitalk-container', () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '45fd556ba2636adfe5a8',
+      clientSecret: '9176b70f8e2d4b8b5abf01b2573883a7f19bf90b',
+      repo        : 'issue',
+      owner       : 'iticd',
+      admin       : ['iticd'],
+      id          : 'b1ed541c03feb302952f06bfccd5a196',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
